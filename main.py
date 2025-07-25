@@ -10,6 +10,7 @@ from google.genai import types
 
 client = genai.Client(api_key=api_key)
 
+from config import SYSTEM_PROMPT
 
 def main():
     if not len(sys.argv) >= 2:
@@ -26,6 +27,7 @@ def main():
     response = client.models.generate_content(
         model=gemini_model,
         contents=messages,
+        config=types.GenerateContentConfig(system_instruction=SYSTEM_PROMPT)
     )
     
     if verbose_flag:

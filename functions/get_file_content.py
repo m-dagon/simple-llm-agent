@@ -1,19 +1,20 @@
 from os.path import isfile
 from os.path import abspath
 from os.path import join
-from functions.working_directory_guard import guard
+from os.path import basename
+from functions.guard import guard
 from config import MAX_CHARS
 
 def get_file_content(working_directory, file_path):
     try:
-        if guard(working_directory, file_path) != 0:
-            return f'Error: Cannot read "{file_path}" ' + \
+        guard_result = guard(working_directory, file_path)
+        if guard_result == 1:
+            return f'Error: Cannot read "{basename(file_path)}" ' + \
             'as it is outside the permitted working directory'
+        elif guard_result == 2:
+            return f'Error: File not found or is not a regular file: "{basename(file_path)}"'
 
         file_abs_path = abspath(join(working_directory, file_path))
-        if not isfile(file_abs_path):
-            return f'Error: File not found or is not a regular file: "{file_path}"'
-
         with open(file_abs_path, "r") as f:
             if f.closed:
                 raise Exception(f"...File {file_path} not opened.")

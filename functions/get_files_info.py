@@ -4,15 +4,16 @@ from os.path import isdir
 from os.path import getsize
 from os import listdir
 
-from functions.working_directory_guard import guard
+from functions.guard import guard
 
 def get_files_info(working_directory, directory="."):
     try:
-        if guard(working_directory, directory) != 0:
-            return f'Error: Cannot list "{directory}" ' + \
-            'as it is outside the permitted working directory'
+        guard_result = guard(working_directory, directory)
+        if guard_result != 0:
+            return f'Error: Cannot list "{directory}" as it is outside the permitted working directory'
         if not isdir(join(working_directory, directory)):
             return f'Error: "{directory}" is not a directory'
+
         files = []
         dir_abs_path = abspath(join(working_directory, directory))
         for item in listdir(dir_abs_path):
