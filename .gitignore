@@ -9,6 +9,8 @@ wheels/
 # Virtual environments
 .venv
 
-
+# Sensitive environment variables
 .env
+
+# Misc
 lorem.txt

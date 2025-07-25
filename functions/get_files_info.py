@@ -3,8 +3,9 @@ from os.path import abspath
 from os.path import isdir
 from os.path import getsize
 from os import listdir
-
 from functions.guard import guard
+
+from google.genai import types
 
 def get_files_info(working_directory, directory="."):
     try:
@@ -25,4 +26,16 @@ def get_files_info(working_directory, directory="."):
     except Exception as e:
         print(f"Error: {e}")
 
-
+schema_get_files_info = types.FunctionDeclaration(
+    name="get_files_info",
+    description="Lists files in the specified directory along with their sizes, constrained to the working directory.",
+    parameters=types.Schema(
+        type=types.Type.OBJECT,
+        properties={
+            "directory": types.Schema(
+                type=types.Type.STRING,
+                description="The directory to list files from, relative to the working directory. If not provided, lists files in the working directory itself.",
+            ),
+        },
+    ),
+)
