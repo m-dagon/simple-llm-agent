@@ -1,9 +1,15 @@
 from functions.get_files_info import get_files_info
 from functions.get_file_content import get_file_content
 from functions.write_file import write_file
-from functions.run_python import run_python_file
+from functions.run_python_file import run_python_file
+from functions.call_function import call_function
 
-def get_files_infor_test():
+from google import genai
+from google.genai import types
+
+from pydantic import BaseModel
+
+def get_files_info_test():
     print(f'Test 1: \n{get_files_info("calculator", ".")}')
     print(f'Test 2: \n{get_files_info("calculator", "pkg")}')
     print(f'Test 3: \n{get_files_info("calculator", "/bin")}')
@@ -29,4 +35,8 @@ def run_python_test():
     print(f'Test 4: \n{run_python_file("calculator", "../main.py")}')
     print(f'Test 5: \n{run_python_file("calculator", "nonexistent.py")}')
 
-run_python_test()
+def call_function_test():
+    #call_function(types.FunctionCall(function_data), True)
+    pass
+
+get_file_content_test()

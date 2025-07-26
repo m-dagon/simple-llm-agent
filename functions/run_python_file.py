@@ -10,14 +10,13 @@ from google.genai import types
 
 def run_python_file(working_directory, file_path, args=[]):
     guard_result = guard(working_directory, file_path)
-    if guard_result == 1:
+    if guard_result != 0:
         return f'Error: Cannot execute "{basename(file_path)}" as it is outside the permitted working directory'
-    elif guard_result == 2:
+    abs_file_path = abspath(join(working_directory, file_path))
+    if not exists(abs_file_path):
         return f'Error: File "{basename(file_path)}" not found.'
-    elif guard_result == 3:
+    if not abs_file_path.endswith(".py"):
         return f'Error: "{basename(file_path)}" is not a Python file.'
-    elif guard_result != 0:
-        return f'Error: "Working directory guard failure.'
     try:
         new_args = ["python"]
         new_args.append(file_path)

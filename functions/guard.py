@@ -9,10 +9,6 @@ def guard(working_directory, directory):
         abs_file_path = abspath(join(working_directory, directory))
         if not abs_file_path.startswith(abs_working_dir):
             return 1
-        if not exists(abs_file_path):
-            return 2
-        if not abs_file_path.endswith(".py"):
-            return 3
 
     except Exception as e:
         print(f"Error: {e}")
