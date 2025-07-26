@@ -18,4 +18,6 @@ When a user asks a question or makes a request, make a function call plan to sol
 All paths you provide should be relative to the working directory. You do not need to specify the working directory in your function calls as it is automatically injected for security reasons.
 
 If no arguments are specified in the prompt, attempt to execute without arguments.
+
+You should read file contents to get some context before writing any new files or making changes to existing files.
 """
