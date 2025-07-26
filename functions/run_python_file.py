@@ -6,6 +6,7 @@ from os.path import abspath
 from os.path import exists
 from os.path import isfile
 from os.path import basename
+from google.genai import types
 
 def run_python_file(working_directory, file_path, args=[]):
     guard_result = guard(working_directory, file_path)
@@ -41,3 +42,21 @@ def run_python_file(working_directory, file_path, args=[]):
         return output
     except Exception as e:
         return f"Error: executing Python file: {e}"
+
+schema_run_python_file = types.FunctionDeclaration(
+    name="run_python_file",
+    description="Run a python script using python subprocess module. STDOUT and STDERR will be returned as a concatenated string, or Process exited with code 'code' if a nonzero exit code is returned by the subprocess module.",
+    parameters=types.Schema(
+        type=types.Type.OBJECT,
+        properties={
+            "file_path": types.Schema(
+                type=types.Type.STRING,
+                description="The file path of the python script to execute, relative to the working directory. If not provided, error string is returned.",
+            ),
+            "args": types.Schema(
+                type=types.Type.STRING,
+                description="The arguments to pass to the python script at file_path."
+            ),
+        },
+    ),
+)

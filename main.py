@@ -5,6 +5,9 @@ from google import genai
 from google.genai import types
 from config import SYSTEM_PROMPT
 from functions.get_files_info import *
+from functions.get_file_content import *
+from functions.write_file import *
+from functions.run_python_file import *
 
 def main():
     if not len(sys.argv) >= 2:
@@ -24,6 +27,9 @@ def main():
     available_functions = types.Tool(
         function_declarations=[
             schema_get_files_info,
+            schema_get_file_content,
+            schema_write_file,
+            schema_run_python_file
         ]
     )
 
@@ -35,7 +41,7 @@ def main():
             system_instruction=SYSTEM_PROMPT
         )
     )
-    
+
     if verbose_flag:
         print(f"User prompt: {user_prompt}")
         print(f"Prompt tokens: {response.usage_metadata.prompt_token_count}")
