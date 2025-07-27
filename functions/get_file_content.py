@@ -1,9 +1,12 @@
+from config import MAX_CHARS
+
 from os.path import isfile
 from os.path import abspath
 from os.path import join
 from os.path import basename
+
 from functions.guard import guard
-from config import MAX_CHARS
+
 from google.genai import types
 
 def get_file_content(working_directory, file_path):

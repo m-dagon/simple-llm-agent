@@ -1,10 +1,18 @@
+# Max number of characters the llm can receive when reading a file.
 MAX_CHARS=10000
-MAX_ITERATIONS=20
+
+# THE LLM WILL BE ABLE TO MODIFY THE CONTENTS OF THE WORKING DIRECTORY!
+WORKING_DIRECTORY="./calculator"
+
+# Python subprocess settings
 SUBPROCESS_USE_SHELL=False
 SUBPROCESS_CAPTURE_OUTPUT=True
 SUBPROCESS_TIMEOUT=30
 SUBPROCESS_TEXT=True
-WORKING_DIRECTORY="./calculator"
+
+# Google Genai Configurations
+MAX_ITERATIONS=20
+# This gives the llm the context of how to respond to the user's prompt.
 SYSTEM_PROMPT= """
 You are a helpful AI coding agent.
 
